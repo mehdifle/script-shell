@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#apt update && apt upgrade -y
+apt update && apt upgrade -y
 apt install curl socat -y
 apt install cron
 apt install nginx -y
