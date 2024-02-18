@@ -2,7 +2,7 @@
 
 apt update && apt upgrade -y
 apt install curl socat -y
-apt install cron
+apt install cron -y
 apt install nginx -y
 systemctl enable nginx
 curl https://get.acme.sh | sh
