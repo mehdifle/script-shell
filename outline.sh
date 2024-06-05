@@ -9,8 +9,8 @@ done
 echo "$key"
 echo "$port"
 
-sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)" -Y
-sudo apt-get install jq -Y
+sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)" -y
+sudo apt install jq -y
 
 curl -X GET "https://socket.loobi.us:$port/$key/access-keys" -H "Content-Type: application/json" -o response.json --insecure
 
