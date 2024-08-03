@@ -25,7 +25,8 @@ do
         id=$(echo $Users_json | jq -r ".[$users_length_start].id")
         name=$(echo $Users_json | jq -r ".[$users_length_start].name")
         password=$(echo $Users_json | jq -r ".[$users_length_start].password")
-        body='{"name":"'$name'","password":"'$password'","port":51618,"method":"chacha20-ietf-poly1305"}'
+        port=$(echo $Users_json | jq -r ".[$users_length_start].port")
+        body='{"name":"'$name'","password":"'$password'","port":'$port',"method":"chacha20-ietf-poly1305"}'
         curl -X PUT "https://localhost:$newport/$newkey/access-keys/$id" -H "Content-Type: application/json" -d $body --insecure
         users_length_start=`expr $users_length_start + 1`
 done
