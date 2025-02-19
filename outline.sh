@@ -15,7 +15,7 @@ echo "$newkey"
 
 apt install jq -y
 
-curl -X GET "https://socket.loobi.us:$port/$key/access-keys" -H "Content-Type: application/json" -o response.json --insecure
+curl -X GET "https://socket.loobi.space:$port/$key/access-keys" -H "Content-Type: application/json" -o response.json --insecure
 
 Users_json=`jq '.accessKeys' response.json`
 Users_length_end=`jq -r ".accessKeys[]| length" response.json|wc -l`
