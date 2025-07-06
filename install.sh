@@ -26,7 +26,7 @@ docker stop watchtower || true
 sleep 2
 
 echo "📦 انتقال کامل تنظیمات از سرور قبلی با پورت $OLD_SSH_PORT و کلید SSH $SSH_KEY..."
-rsync -avz -e "ssh -i $SSH_KEY -p $OLD_SSH_PORT" "${SSH_USER}@${OLD_SERVER}:/opt/outline/" /opt/outline/
+rsync -avz -e "ssh -p $OLD_SSH_PORT" "${SSH_USER}@${OLD_SERVER}:/opt/outline/" /opt/outline/
 
 echo "🚀 راه‌اندازی مجدد Outline با تنظیمات قبلی..."
 docker start shadowbox
