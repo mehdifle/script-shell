@@ -11,14 +11,14 @@ TMP_DIR="/tmp/outline_migration"
 echo "🔧 تنظیم حالت غیر تعاملی برای نصب بسته‌ها..."
 export DEBIAN_FRONTEND=noninteractive
 
-echo "🔧 نصب ابزارهای مورد نیاز..."
+#echo "🔧 نصب ابزارهای مورد نیاز..."
 #apt update -y
 #apt install -y rsync curl jq docker.io docker-compose openssh-server
 
 mkdir -p "$TMP_DIR"
 
 echo "⚙️ نصب اولیه Outline Server..."
-bash -c "$(curl -sS https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)" > "$TMP_DIR/install.log" 2>&1
+#bash -c "$(curl -sS https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)" > "$TMP_DIR/install.log" 2>&1
 
 echo "🛑 توقف موقت کانتینرهای Outline..."
 docker stop shadowbox || true
