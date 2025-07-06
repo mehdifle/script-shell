@@ -12,8 +12,8 @@ echo "🔧 تنظیم حالت غیر تعاملی برای نصب بسته‌ه
 export DEBIAN_FRONTEND=noninteractive
 
 echo "🔧 نصب ابزارهای مورد نیاز..."
-apt update -y
-apt install -y rsync curl jq docker.io docker-compose openssh-server
+#apt update -y
+#apt install -y rsync curl jq docker.io docker-compose openssh-server
 
 mkdir -p "$TMP_DIR"
 
