@@ -18,7 +18,7 @@ export DEBIAN_FRONTEND=noninteractive
 mkdir -p "$TMP_DIR"
 
 echo "⚙️ نصب اولیه Outline Server..."
-bash -c "$(curl -sS https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)" > "$TMP_DIR/install.log" 2>&1
+bash -c "$(curl -sS https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
 
 echo "🛑 توقف موقت کانتینرهای Outline..."
 docker stop shadowbox || true
