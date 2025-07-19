@@ -18,6 +18,7 @@ mkdir -p "$TMP_DIR"
 
 echo "⚙️ نصب SSHPASS..."
 apt install sshpass
+apt install rsync
 
 echo "⚙️ نصب اولیه Outline Server..."
 bash -c "$(curl -sS https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
@@ -29,7 +30,10 @@ sleep 2
 
 echo "📦 انتقال کامل تنظیمات از سرور قبلی با پورت $OLD_SSH_PORT..."
 # Use sshpass to provide password for rsync over SSH
-sshpass -p "$SSH_PASSWORD" rsync -avz -e "ssh -p $OLD_SSH_PORT" "${SSH_USER}@${OLD_SERVER}:/opt/outline/" /opt/outline/
+ssh -p 3031 root@socket.loobi.space
+apt install rsync
+exit
+SSHPASS="$SSH_PASSWORD" rsync -avz -e 'sshpass -e ssh -o StrictHostKeyChecking=no -p 3031' root@socket.loobi.space:/opt/outline/ /opt/outline/
 
 echo "🚀 راه‌اندازی مجدد Outline با تنظیمات قبلی..."
 docker start shadowbox
