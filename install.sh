@@ -16,6 +16,9 @@ echo
 
 mkdir -p "$TMP_DIR"
 
+echo "⚙️ نصب SSHPASS..."
+apt install sshpass
+
 echo "⚙️ نصب اولیه Outline Server..."
 bash -c "$(curl -sS https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
 
