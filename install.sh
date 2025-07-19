@@ -5,15 +5,14 @@ set -e
 OLD_SERVER="socket.loobi.space"
 SSH_USER="root"
 OLD_SSH_PORT=3031
-SSH_KEY="$HOME/.ssh/id_rsa"   # می‌تونی این مسیر رو تغییر بدی اگر کلیدت جای دیگه‌ست
 TMP_DIR="/tmp/outline_migration"
 
 echo "🔧 تنظیم حالت غیر تعاملی برای نصب بسته‌ها..."
 export DEBIAN_FRONTEND=noninteractive
 
-#echo "🔧 نصب ابزارهای مورد نیاز..."
-#apt update -y
-#apt install -y rsync curl jq docker.io docker-compose openssh-server
+# Prompt for SSH password
+read -sp "لطفاً پسورد SSH برای $SSH_USER@$OLD_SERVER را وارد کنید: " SSH_PASSWORD
+echo
 
 mkdir -p "$TMP_DIR"
 
@@ -25,8 +24,9 @@ docker stop shadowbox || true
 docker stop watchtower || true
 sleep 2
 
-echo "📦 انتقال کامل تنظیمات از سرور قبلی با پورت $OLD_SSH_PORT و کلید SSH $SSH_KEY..."
-rsync -avz -e "ssh -p $OLD_SSH_PORT" "${SSH_USER}@${OLD_SERVER}:/opt/outline/" /opt/outline/
+echo "📦 انتقال کامل تنظیمات از سرور قبلی با پورت $OLD_SSH_PORT..."
+# Use sshpass to provide password for rsync over SSH
+sshpass -p "$SSH_PASSWORD" rsync -avz -e "ssh -p $OLD_SSH_PORT" "${SSH_USER}@${OLD_SERVER}:/opt/outline/" /opt/outline/
 
 echo "🚀 راه‌اندازی مجدد Outline با تنظیمات قبلی..."
 docker start shadowbox
@@ -52,4 +52,4 @@ echo "♻️ ریستارت سرویس SSH..."
 systemctl restart ssh
 
 echo "✅ SSH حالا روی پورت 3031 در دسترس است. از دستور زیر برای اتصال استفاده کن:"
-echo "   ssh -p 3031 -i $SSH_KEY ${SSH_USER}@<IP>"
+echo "   ssh -p 3031 ${SSH_USER}@<IP>"
